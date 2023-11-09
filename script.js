@@ -68,11 +68,15 @@ function addToDoItem(text) {
 // that matches the id passed to the function, remove it from the array
 // the function does not need to return anything
 function removeToDoItem(todoId) {
-    if (typeof todoId !== 'number') {
-      throw new Error('Input must be a number');
+  if (typeof todoId !== 'number') {
+    throw new Error('Input must be a number');
+  }
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].id === todoId) {
+      todoItems.splice(i, 1);
+      break; // Stop the loop once the todo item is removed
     }
-  if (todoId >= 0 && todoId < todoItems.length) {
-    todoItems.splice(todoId, 1);
   }
 }
 
@@ -104,10 +108,17 @@ function deleteToDoItem(todoId) {
   if (typeof todoId !== 'number') {
     throw new Error('Input must be a number');
   }
-  if (todoId >= 0 && todoId < todoItems.length) {
-    todoItems.splice(todoId, 1);
+
+  for (let i = 0; i < todoItems.length; i++) {
+    if (todoItems[i].id === todoId) {
+      todoItems.splice(i, 1);
+      return true; 
+    }
   }
+
+  return false;
 }
+
 
 // Function to clear all completed tasks
 // Loop through the array of todos, and when you find a todo item that is marked
